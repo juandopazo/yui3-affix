@@ -85,9 +85,7 @@ function Affix(config) {
     @type Object
     @private
     **/
-    this._handle = Y.one('doc').on(
-        'scroll', Y.throttle(Y.bind(this.refresh, this), 15)
-    );
+    this._handle = Y.on('scroll', Y.throttle(Y.bind(this.refresh, this), 15));
     this.refresh();
 }
 
