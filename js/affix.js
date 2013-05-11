@@ -106,6 +106,10 @@ Y.mix(Affix.prototype, {
             isOverOffset = (this._y - Y.DOM.docScrollY() < offsetTop) ||
                             (this._x - Y.DOM.docScrollX() < offsetLeft);
 
+        Y.log('is over offset: ' + isOverOffset, 'info');
+        Y.log('y: ' + this._y + '; scrollX: ' + Y.DOM.docScrollY() + '; offsetLeft: ' + offsetTop, 'info');
+        Y.log('x: ' + this._x + '; scrollX: ' + Y.DOM.docScrollX() + '; offsetLeft: ' + offsetLeft, 'info');
+
         // reset position styles if no offset was provided in that direction
         // because if an inline style was applied it'll break sooner or
         // later because of the changed to "fixed" position
