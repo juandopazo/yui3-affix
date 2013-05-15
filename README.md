@@ -8,7 +8,7 @@ A Bootstrap-inspired Affix plugin for YUI.
 Getting Started
 ---------------
 
-Create a new YUI instance for your application and populate it with the modules you need by specifying them as arguments to the `YUI().use()` method. YUI will automatically load any dependencies required by the modules you specify. Then plug the Affix plugin to any list that contains links to anchors in your page.
+Create a new YUI instance for your application and populate it with the modules you need by specifying them as arguments to the `YUI().use()` method. YUI will automatically load any dependencies required by the modules you specify. Then plug the Affix plugin to any node you want to fix.
 
 ```html
 <script>
