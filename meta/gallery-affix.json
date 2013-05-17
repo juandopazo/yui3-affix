@@ -6,7 +6,7 @@
             "node-style",
 			"node-pluginhost",
             "yui-throttle",
-            "oop"
+            "plugin"
 		]
 	}
 }

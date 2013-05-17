@@ -3,6 +3,7 @@ A plugin that makes a node stick to a position when it scrolls over a certain
 offset. Based on Bootstrap's Affix plugin.
 
 @class Plugin.Affix
+@extends Plugin.Base
 @constructor
 @param {Object} config Object literal containing configuration options
 @param {Object} config.host Node or widget (the boundingBox will be used)
@@ -13,83 +14,66 @@ offset. Based on Bootstrap's Affix plugin.
     left should be used
 @param {Number} [config.offset.top] Top offset to use.
 **/
-function Affix(config) {
-    var node = config.host,
-        offset = config.offset || Math.floor(parseFloat(node.getData('offset'))),
-        xy = node.getXY();
-
-    if (Y.Widget && node instanceof Y.Widget) {
-        node = node.get('boundingBox');
-    }
-
-    /**
-    The node that will be fixed.
-
-    @property _node
-    @type Node
-    @private
-    **/
-    this._node       = node;
-    /**
-    The offset option.
-
-    @property _offset
-    @type Number
-    @private
-    **/
-    this._offset     = offset;
-    /**
-    The offset left option.
-
-    @property _offsetLeft
-    @type Number
-    @private
-    **/
-    this._offsetLeft = typeof offset.left === 'number' ? offset.left :
-                            (node.getData('offset-left') || 0);
-    /**
-    The offset top option.
-
-    @property _offsetTop
-    @type Number
-    @private
-    **/
-    this._offsetTop  = typeof offset.top === 'number' ? offset.top :
-                            (node.getData('offset-top') || 0);
-
-    if (!this._offsetLeft && !this._offsetTop && !offset) {Y.log('No offset supplied for Affix', 'warn');}
-  
-    /**
-    The original left position of the node. Used to calculate if the node is
-    over the offset.
-
-    @property _x
-    @type Number
-    @private
-    **/
-    this._x = xy[0];
-    /**
-    The original top position of the node. Used to calculate if the node is
-    over the offset.
-
-    @property _y
-    @type Number
-    @private
-    **/
-    this._y = xy[1];
-
-    /**
-    Event handle for the document's `scroll` event.
-
-    @property _handle
-    @type Object
-    @private
-    **/
-    this._handle = Y.on('scroll', Y.throttle(Y.bind(this.refresh, this), 15));
-    this.refresh();
+function Affix() {
+    Affix.superclass.constructor.apply(this, arguments);
 }
+Y.extend(Affix, Y.Plugin.Base, {
+    /**
+    Get the correct node when plugged in Nodes or Widgets
 
-Y.mix(Affix.prototype, {
+    @method _getNode
+    @return Node
+    @private
+    **/
+    _getNode: function () {
+        var node;
+
+        if (!this._node) {
+            node = this.get('host');
+
+            if (Y.Widget && node instanceof Y.Widget) {
+                node = node.get('boundingBox');
+            }
+
+            this._node = node;
+        }
+
+        return this._node;
+    },
+    initializer: function () {
+        var node = this._getNode(),
+            xy = node.getXY();
+
+        /**
+        The original left position of the node. Used to calculate if the node is
+        over the offset.
+
+        @property _x
+        @type Number
+        @private
+        **/
+        this._x = xy[0];
+        /**
+        The original top position of the node. Used to calculate if the node is
+        over the offset.
+
+        @property _y
+        @type Number
+        @private
+        **/
+        this._y = xy[1];
+
+        /**
+        Event handle for the document's `scroll` event.
+
+        @property _handle
+        @type Object
+        @private
+        **/
+        this._handle = Y.on('scroll', Y.throttle(Y.bind(this.refresh, this), 15));
+
+        this.refresh();
+    },
     /**
     Fixes or releases the node according to the scroll position.
     Called automatically when scrolling.
@@ -97,9 +81,9 @@ Y.mix(Affix.prototype, {
     @method refresh
     **/
     refresh: function () {
-        var offset = this._offset,
-            offsetLeft = this._offsetLeft || offset,
-            offsetTop = this._offsetTop || offset,
+        var offset = this.get('offset'),
+            offsetLeft = offset.left,
+            offsetTop = offset.top,
 
             // do the math for both directions even though it may be set for
             // only one direction for simplicity
@@ -111,13 +95,40 @@ Y.mix(Affix.prototype, {
         // later because of the changed to "fixed" position
         this._node.setStyles({
             position: isOverOffset ? 'fixed' : '',
-            left: isOverOffset && this._offsetLeft ? (offsetLeft + 'px') : '',
-            top: isOverOffset && this._offsetTop ? (offsetTop + 'px') : ''
+            left: isOverOffset && offsetLeft ? (offsetLeft + 'px') : '',
+            top: isOverOffset && offsetTop ? (offsetTop + 'px') : ''
         });
     },
-    destroy: function () {
+    destructor: function () {
         this._handle.detach();
         this._handle = this._node = null;
+    }
+}, {
+    ATTRS: {
+        offset: {
+            setter: function (value) {
+                return typeof value === 'number' ? {
+                    top: value,
+                    left: value
+                } : value;
+            },
+            valueFn: function () {
+                var node = this._getNode(),
+                    data = parseInt(node.getData('offset'), 10),
+                    offset = {};
+
+                if (Y.Lang.isNumber(data)) {
+                    offset.top = offset.left = data;
+                } else {
+                    offset.left = parseInt(node.getData('offset-left'), 10);
+                    offset.top = parseInt(node.getData('offset-top'), 10);
+                }
+
+                if (!offset.left && !offset.top) { Y.log('no offset provided', 'info'); }
+
+                return offset;
+            }
+        }
     }
 });
 
