@@ -15,6 +15,7 @@
             height: 150px;
             background: gray;
             margin-bottom: 50px;
+            width: 200%;
         }
         #affix {
             width: 200px;
@@ -25,8 +26,11 @@
             position: fixed;
             background: white;
             top: 10px;
-            left: 10px;
+            right: 10px;
             z-index: 2;
+        }
+        #bd {
+            margin-left: 200px;
         }
     </style>
 </head>
@@ -34,7 +38,7 @@
     <div id="logger"></div>
     <div id="header">
     </div>
-    <div class="yui3-g">
+    <div class="yui3-g" id="bd">
         <div class="yui3-u-1-4">
             <div id="affix" data-offset-top="50"></div>
         </div>
