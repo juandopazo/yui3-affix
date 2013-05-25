@@ -1,0 +1,15 @@
+{
+    "name"       : "yui3-affix",
+    "displayName": "YUI Affix Plugin",
+    "description": "A Bootstrap-inspired Affix plugin for YUI",
+    "author"     : [ "jdopazo" ],
+    "use"        : [ "gallery-affix" ],
+
+    "tags": [ "gallery", "plugin", "affix" ],
+
+    "bgcolor": "#333",
+    "bgimage": "http://juandopazo.github.io/yui3-io-utils/carbon_fibre_v2.png",
+    "repo": "https://github.com/juandopazo/yui3-affix",
+    "componentAPI": "api/classes/Plugin.Affix.html"
+
+}

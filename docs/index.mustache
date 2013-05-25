@@ -1,0 +1,38 @@
+{{>getting-started}}
+
+<h2>Using the Affix plugin</h2>
+
+<p>Use Affix by plugging it into the node you want fixed. Pass it a configuration object with an <code>offset</code> property. This property may be either a number or an object. A number will be assumed the same value for both the top and left offsets. The object may have <code>top</code> and/or <code>left</code> properties. This offset is the number of pixels from which the node will become fixed.</p>
+
+```javascript
+YUI({
+    gallery: '{{gallery-build}}'
+}).use('gallery-affix', function (Y) {
+
+    Y.one('#navbar').plug(Y.Plugin.Affix, {
+        offset: {
+            top: 100
+        }
+    });
+
+});
+```
+
+<p>Alternatively you can set the offset as a data- attribute of the plugged node.</p>
+
+```html
+<div class="affix" data-offset-top="100">...</div>
+```
+
+<p>You can use the Affix plugin in nodes or in widgets. When plugging it into a Widget the widget's <code>boundingBox</code> will be used.</p>
+
+<h2>Example</h2>
+
+<p>The left navigation of this document page is a working example of the Affix plugin.</p>
+
+<h2>Release notes</h2>
+
+<h3>gallery-2013.05.15-21-12</h3>
+<ul>
+    <li>Initial release</li>
+</ul>
