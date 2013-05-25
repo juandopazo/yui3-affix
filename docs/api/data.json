@@ -1,0 +1,133 @@
+{
+    "project": {},
+    "files": {
+        "js\\affix.js": {
+            "name": "js\\affix.js",
+            "modules": {},
+            "classes": {
+                "Plugin.Affix": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Plugin.Affix": {
+            "name": "Plugin.Affix",
+            "shortname": "Plugin.Affix",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "js\\affix.js",
+            "line": 1,
+            "description": "A plugin that makes a node stick to a position when it scrolls over a certain\noffset. Based on Bootstrap's Affix plugin.",
+            "extends": "Plugin.Base",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "config",
+                    "description": "Object literal containing configuration options",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "host",
+                            "description": "Node or widget (the boundingBox will be used)",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "offset",
+                            "description": "The offset to use. If not found it will\n    default to data-offset-top, data-offset-left or data-offset properties on\n    the host",
+                            "type": "Object|Number",
+                            "optional": true,
+                            "props": [
+                                {
+                                    "name": "left",
+                                    "description": "Left offset to use. At least one of top or\n    left should be used",
+                                    "type": "Number",
+                                    "optional": true
+                                },
+                                {
+                                    "name": "top",
+                                    "description": "Top offset to use.",
+                                    "type": "Number",
+                                    "optional": true
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "js\\affix.js",
+            "line": 21,
+            "description": "Get the correct node when plugged in Nodes or Widgets",
+            "itemtype": "method",
+            "name": "_getNode",
+            "return": {
+                "description": "Node"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Plugin.Affix"
+        },
+        {
+            "file": "js\\affix.js",
+            "line": 47,
+            "description": "The original left position of the node. Used to calculate if the node is\nover the offset.",
+            "itemtype": "property",
+            "name": "_x",
+            "type": "Number",
+            "access": "private",
+            "tagname": "",
+            "class": "Plugin.Affix"
+        },
+        {
+            "file": "js\\affix.js",
+            "line": 56,
+            "description": "The original top position of the node. Used to calculate if the node is\nover the offset.",
+            "itemtype": "property",
+            "name": "_y",
+            "type": "Number",
+            "access": "private",
+            "tagname": "",
+            "class": "Plugin.Affix"
+        },
+        {
+            "file": "js\\affix.js",
+            "line": 66,
+            "description": "Event handle for the document's `scroll` event.",
+            "itemtype": "property",
+            "name": "_handle",
+            "type": "Object",
+            "access": "private",
+            "tagname": "",
+            "class": "Plugin.Affix"
+        },
+        {
+            "file": "js\\affix.js",
+            "line": 77,
+            "description": "Fixes or releases the node according to the scroll position.\nCalled automatically when scrolling.",
+            "itemtype": "method",
+            "name": "refresh",
+            "class": "Plugin.Affix"
+        },
+        {
+            "file": "js\\affix.js",
+            "line": 135,
+            "description": "Plugin namespace",
+            "itemtype": "property",
+            "name": "NS",
+            "type": "String",
+            "default": "\"affix\"",
+            "static": 1,
+            "class": "Plugin.Affix"
+        }
+    ],
+    "warnings": []
+}
