@@ -7,9 +7,9 @@
 
     "tags": [ "gallery", "plugin", "affix" ],
 
-    "bgcolor": "#333",
-    "bgimage": "http://juandopazo.github.io/yui3-io-utils/carbon_fibre_v2.png",
-    "repo": "https://github.com/juandopazo/yui3-affix",
-    "componentAPI": "api/classes/Plugin.Affix.html"
+    "bgcolor": "#af3732",
+    "bgimage": "p5.png",
+    "repo": "https://github.com/juandopazo/yui3-scrollspy",
+    "componentAPI": "api/classes/Plugin.ScrollSpy.html"
 
 }
