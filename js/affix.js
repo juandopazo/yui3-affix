@@ -66,11 +66,14 @@ Y.extend(Affix, Y.Plugin.Base, {
         /**
         Event handle for the document's `scroll` event.
 
-        @property _handle
-        @type Object
+        @property _handles
+        @type Array
         @private
         **/
-        this._handle = Y.on('scroll', Y.throttle(Y.bind(this.refresh, this), 15));
+        this._handles = [
+            Y.on('scroll', Y.throttle(Y.bind(this.refresh, this), 15)),
+            Y.on('scroll', Y.debounce(50, this.refresh), null, this)
+        ];
 
         this.refresh();
     },
@@ -100,8 +103,10 @@ Y.extend(Affix, Y.Plugin.Base, {
         });
     },
     destructor: function () {
-        this._handle.detach();
-        this._handle = this._node = null;
+        Y.Array.each(this._handles, function (handle) {
+            handle.detach();
+        });
+        this._handles = this._node = null;
     }
 }, {
     ATTRS: {

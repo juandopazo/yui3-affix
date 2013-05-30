@@ -6,7 +6,8 @@
             "node-style",
 			"node-pluginhost",
             "yui-throttle",
-            "plugin"
+            "plugin",
+            "gallery-debounce"
 		]
 	}
 }
