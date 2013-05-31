@@ -71,8 +71,15 @@ Y.extend(Affix, Y.Plugin.Base, {
         @private
         **/
         this._handles = [
+            // The scroll event fires too often, almost as much as the mousemove
+            // event. Throttle it to avoid touching the DOM so many times
+            // per second
             Y.on('scroll', Y.throttle(Y.bind(this.refresh, this), 15)),
-            Y.on('scroll', Y.debounce(50, this.refresh), null, this)
+            // Throttling can silence the last scroll event fired by the browser
+            // Debouncing always gets called after all throttled events to
+            // avoid occasional fast scrolls that cause the node not to change
+            // its fixed state
+            Y.on('scroll', Y.debounce(15, this.refresh), null, this)
         ];
 
         this.refresh();
