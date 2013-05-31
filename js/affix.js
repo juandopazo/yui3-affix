@@ -97,8 +97,10 @@ Y.extend(Affix, Y.Plugin.Base, {
 
             // do the math for both directions even though it may be set for
             // only one direction for simplicity
-            isOverOffset = (this._y - Y.DOM.docScrollY() < offsetTop) ||
-                            (this._x - Y.DOM.docScrollX() < offsetLeft);
+            // Do the vertical calculation first since that is the most common
+            // use case
+            isOverOffset = (offsetTop && this._y - Y.DOM.docScrollY() < offsetTop) ||
+                            (offsetLeft && this._x - Y.DOM.docScrollX() < offsetLeft);
 
         // reset position styles if no offset was provided in that direction
         // because if an inline style was applied it'll break sooner or
