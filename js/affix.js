@@ -105,7 +105,7 @@ Y.extend(Affix, Y.Plugin.Base, {
         // reset position styles if no offset was provided in that direction
         // because if an inline style was applied it'll break sooner or
         // later because of the changed to "fixed" position
-        this._node.setStyles({
+        this._getNode().setStyles({
             position: isOverOffset ? 'fixed' : '',
             left: isOverOffset && offsetLeft ? (offsetLeft + 'px') : '',
             top: isOverOffset && offsetTop ? (offsetTop + 'px') : ''

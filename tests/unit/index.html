@@ -71,10 +71,15 @@ YUI({
     filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
     modules: {
         'gallery-affix': {
-            fullpath: '/build/gallery-affix/gallery-affix.js',
+            fullpath: '/build/gallery-affix/gallery-affix-min.js',
             requires: [
-                'node',
-                'node-pluginhost'
+                "node-base",
+                "node-screen",
+                "node-style",
+                "node-pluginhost",
+                "yui-throttle",
+                "plugin",
+                "gallery-debounce"
             ]
         }
     }
